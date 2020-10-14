@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 //Create a class called App than uses (extends) the functionality of Component
@@ -10,12 +9,17 @@ class App extends Component{
     super();
     //Initialises state for the component
     this.state={
-      monsters: [
-        {name: 'Frankenstein', id: 'asc1'},
-        {name: 'Dracula', id: 'asr2'},
-        {name: 'Zombie', id: 'as1w'}
-      ]
+      monsters: []
     }
+  }
+  //Fetches user data from API - Lifecycle method that is called when the component mounts
+  componentDidMount(){
+    //Requests user data from the API - returns a Promise
+    fetch('https://jsonplaceholder.typicode.com/users')
+    //Parses what is returned from the API into a JSON format our JS can use - list of users
+    .then(response => response.json())
+    //Sets the component state to be the list of users
+    .then(users => this.setState({monsters: users}))
   }
   render(){
     return (
