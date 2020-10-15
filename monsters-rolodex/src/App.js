@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {CardList} from './components/card-list/card-list.component.jsx';
 import './App.css';
 
 //Create a class called App than uses (extends) the functionality of Component
@@ -21,10 +22,11 @@ class App extends Component{
     //Sets the component state to be the list of users
     .then(users => this.setState({monsters: users}))
   }
+  //Renders the app and passes down monster data as props
   render(){
     return (
       <div className="App">
-        {this.state.monsters.map((monster) => <div key={monster.id}> {monster.name} </div> )}
+        <CardList monsters={this.state.monsters} />
       </div>
     );
   }
