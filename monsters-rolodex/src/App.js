@@ -10,7 +10,8 @@ class App extends Component{
     super();
     //Initialises state for the component
     this.state={
-      monsters: []
+      monsters: [],
+      searchField:''
     }
   }
   //Fetches user data from API - Lifecycle method that is called when the component mounts
@@ -24,9 +25,16 @@ class App extends Component{
   }
   //Renders the app and passes down monster data as props
   render(){
+    //Extracts the monsters and what the user types from state
+    const {monsters, searchField} = this.state;
+    //Filters monsters based on what the user types
+    const filteredMonsters = monsters.filter(monster =>{
+      return monster.name.toLowerCase().includes(searchField.toLowerCase())
+    });
     return (
       <div className="App">
-        <CardList monsters={this.state.monsters} />
+        <input type='search' placeholder='search monsters' onChange={e => {this.setState({searchField: e.target.value})}} />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
