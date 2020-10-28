@@ -24,6 +24,10 @@ class App extends Component{
     //Sets the component state to be the list of users
     .then(users => this.setState({monsters: users}))
   }
+  //Saves what the user types to the searchField state - this state is used to filter monsters on screen
+  handleChange = (e) => {
+    this.setState({searchField: e.target.value});
+  };
   //Renders the app and passes down monster data as props
   render(){
     //Extracts the monsters and what the user types from state
@@ -36,7 +40,7 @@ class App extends Component{
       <div className="App">
         <SearchBox
           placeholder={'search monsters'}
-          handleChange={e => {this.setState({searchField: e.target.value})}}
+          handleChange={this.handleChange}
         />
         <CardList monsters={filteredMonsters} />
       </div>
